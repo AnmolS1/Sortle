@@ -1,16 +1,5 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
 
-import { importProvidersFrom } from '@angular/core';
-import { AppComponent } from './app/app.component';
-import { AppRoutingModule } from './app/app-routing.module';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
-
-bootstrapApplication(AppComponent, {
-	providers: [
-		importProvidersFrom(BrowserModule, AppRoutingModule),
-		provideAnimationsAsync()
-	]
-})
+platformBrowserDynamic().bootstrapModule(AppModule)
 	.catch(err => console.error(err));

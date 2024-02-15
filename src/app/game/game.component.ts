@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StartComponent } from '../start/start.component';
 
 import { sorts } from '../algorithms';
 
 @Component({
 	selector: 'app-game',
-	standalone: true,
-	imports: [
-		StartComponent
-	],
 	templateUrl: './game.component.html',
 	styleUrl: './game.component.less'
 })
