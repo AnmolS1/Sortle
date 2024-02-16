@@ -15,15 +15,21 @@ div {
 	justify-content: center;
 	align-items: center;
 	margin-top: 20px;
+	width: 100%;
+	
+	mat-card {
+		width: 640px;
+	}
 }
 
 .array-item {
 	color: white;
-	font-size: 24px;
-	padding: 15px;
+	font-size: 14px;
+	font-size: clamp(14px, 2vw, 20px);
+	padding: 1vw;
 	display: inline-block;
 	border-right: 2px solid white;
-	width: 60px;
+	width: calc(100%/10);
 	text-align: center;
 	box-sizing: border-box;
 }
@@ -33,9 +39,16 @@ div {
 }
 
 @media screen and (max-width: 640px) {
-	.array-item {
-		font-size: 15px;
-		width: 39px;
-		padding: 10px;
+	.array-container mat-card {
+		width: 100%;
+		
+		mat-card-content {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	
+	mat-card-title {
+		font-size: 14px;
 	}
 }
