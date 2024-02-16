@@ -1,0 +1,58 @@
+div {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+
+	mat-card {
+		color: white;
+	}
+}
+
+.array-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	width: 100%;
+	
+	mat-card {
+		width: 640px;
+		
+		mat-card-header {
+			padding: 16px;
+		}
+	}
+}
+
+.array-item {
+	color: white;
+	font-size: 14px;
+	font-size: clamp(14px, 2vw, 20px);
+	padding: 1vw;
+	display: inline-block;
+	border-right: 1px solid white;
+	width: calc(100%/10);
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.array-item:last-child {
+	border-right: none;
+}
+
+@media screen and (max-width: 640px) {
+	.array-container mat-card {
+		width: 100%;
+		
+		mat-card-content {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	
+	mat-card-title {
+		font-size: 14px;
+	}
+}
