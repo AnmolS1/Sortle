@@ -1,1 +1,8 @@
-<app-start [solution]="solution" [initial]="arrays[0]"></app-start>
+<app-start [solution]="solution" [array]="starting_array"></app-start>
+
+<br>
+
+<div *ngFor="let _ of [].constructor(num_guesses); let i = index" class="board">
+	<app-guess *ngIf="guess_index > i - 1" [options]="options" [solution]="solution" (guessSubmitted)="submitGuess($event)"></app-guess>
+	<app-hint *ngIf="guesses[i] != '' && guesses[i] != solution['name']" [array]="arrays[i]"></app-hint>
+</div>

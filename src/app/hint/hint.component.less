@@ -1,0 +1,40 @@
+.array-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	
+	mat-card {
+		width: 648px;
+		
+		.array-item {
+			font-size: 14px;
+			font-size: clamp(14px, 2vw, 20px);
+			padding: 1vw;
+			display: inline-block;
+			border-right: 1px solid white;
+			width: calc(100%/10);
+			text-align: center;
+			box-sizing: border-box;
+			
+			&:last-child {
+				border-right: none;
+			}
+			
+			.changed {
+				color: green;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 648px) {
+	.array-container mat-card {
+		width: 100%;
+		
+		mat-card-content {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}

@@ -1,5 +1,5 @@
 <div>
-	<mat-card>
+	<mat-card color="primary">
 		<mat-card-header>
 			<mat-card-title>Best-Case Runtime</mat-card-title>
 		</mat-card-header>
@@ -7,8 +7,8 @@
 			{{ solution['best-case'] }}
 		</mat-card-content>
 	</mat-card>
-
-	<mat-card>
+	
+	<mat-card color="primary">
 		<mat-card-header>
 			<mat-card-title>Worst-Case Runtime</mat-card-title>
 		</mat-card-header>
@@ -16,8 +16,8 @@
 			{{ solution['worst-case'] }}
 		</mat-card-content>
 	</mat-card>
-
-	<mat-card>
+	
+	<mat-card color="primary">
 		<mat-card-header>
 			<mat-card-title>Average Runtime</mat-card-title>
 		</mat-card-header>
@@ -28,12 +28,12 @@
 </div>
 
 <div class="array-container">
-	<mat-card>
+	<mat-card color="primary">
 		<mat-card-header>
 			<mat-card-title>Initial Array</mat-card-title>
 		</mat-card-header>
 		<mat-card-content>
-			<div *ngFor="let number of initial" class="array-item">
+			<div *ngFor="let number of array" class="array-item">
 				{{ number }}
 			</div>
 		</mat-card-content>

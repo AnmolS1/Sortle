@@ -4,10 +4,6 @@ div {
 	justify-content: center;
 	align-items: center;
 	gap: 16px;
-
-	mat-card {
-		color: white;
-	}
 }
 
 .array-container {
@@ -18,7 +14,7 @@ div {
 	width: 100%;
 	
 	mat-card {
-		width: 640px;
+		width: 648px;
 		
 		mat-card-header {
 			padding: 16px;
@@ -27,7 +23,6 @@ div {
 }
 
 .array-item {
-	color: white;
 	font-size: 14px;
 	font-size: clamp(14px, 2vw, 20px);
 	padding: 1vw;
@@ -36,13 +31,13 @@ div {
 	width: calc(100%/10);
 	text-align: center;
 	box-sizing: border-box;
+	
+	&:last-child {
+		border-right: none;
+	}
 }
 
-.array-item:last-child {
-	border-right: none;
-}
-
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 648px) {
 	.array-container mat-card {
 		width: 100%;
 		

@@ -1,0 +1,27 @@
+mat-form-field {
+	width: 100%;
+}
+
+.incorrect {
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+		background-color: rgb(255, 31, 31);
+	}
+
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input,
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label,
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label--float-above {
+		color: white;
+	}
+}
+
+.correct {
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+		background-color: rgb(40, 92, 16);
+	}
+
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input,
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label,
+	::ng-deep .mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label--float-above {
+		color: white;
+	}
+}
