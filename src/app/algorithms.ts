@@ -15,7 +15,7 @@ export const sorts: any[] = [
 						arr[j] = arr[j + 1];
 						arr[j + 1] = temp;
 						
-						hints.push({ 'array': arr.slice(), 'i1': j, 'i2': j + 1 });
+						hints.push({ 'array': arr.slice(), 'indices': [j, j + 1] });
 						
 						if (hints.length === num_hints) {
 							return hints;
@@ -50,7 +50,7 @@ export const sorts: any[] = [
 					arr[i] = arr[minIndex];
 					arr[minIndex] = temp;
 					
-					hints.push({ 'array': arr.slice(), 'i1': i, 'i2': minIndex });
+					hints.push({ 'array': arr.slice(), 'indices': [i, minIndex] });
 					
 					if (hints.length === num_hints) {
 						return hints;
@@ -77,20 +77,16 @@ export const sorts: any[] = [
 				while (j >= 0 && arr[j] > key) {
 					arr[j + 1] = arr[j];
 					j--;
-					
-					hints.push({ 'array': arr.slice(), 'i1': j + 1, 'i2': i });
-					
-					if (hints.length === num_hints) {
-						return hints;
-					}
 				}
 				
 				arr[j + 1] = key;
 				
-				hints.push({ 'array': arr.slice(), 'i1': j + 1, 'i2': i });
-				
-				if (hints.length === num_hints) {
-					return hints;
+				if (j != i - 1) {
+					hints.push({ 'array': arr.slice(), 'indices': [j + 1, i] });
+					
+					if (hints.length === num_hints) {
+						return hints;
+					}
 				}
 			}
 			
@@ -131,34 +127,17 @@ export const sorts: any[] = [
 						j++;
 					}
 					
-					hints.push({ 'array': arr.slice(), 'i1': left + i, 'i2': middle + 1 + j });
 					k++;
-					
-					if (hints.length === num_hints) {
-						return;
-					}
 				}
 			
 				while (i < n1) {
 					arr[k] = L[i];
 					i++; k++;
-					
-					hints.push({ 'array': arr.slice(), 'i1': left + i, 'i2': k });
-					
-					if (hints.length === num_hints) {
-						return;
-					}
 				}
 				
 				while (j < n2) {
 					arr[k] = R[j];
 					j++; k++;
-					
-					hints.push({ 'array': arr.slice(), 'i1': middle + 1 + j, 'i2': k });
-					
-					if (hints.length === num_hints) {
-						return;
-					}
 				}
 			}
 			
@@ -170,6 +149,12 @@ export const sorts: any[] = [
 					mergeSortHelper(arr, middle + 1, right);
 					
 					merge(arr, left, middle, right);
+					
+					hints.push({ 'array': arr.slice(), 'indices': [...Array(right - left + 1).keys()].map(i => i + left) });
+					
+					if (hints.length === num_hints) {
+						return;
+					}
 				}
 			};
 			
@@ -198,19 +183,25 @@ export const sorts: any[] = [
 						arr[i] = arr[j];
 						arr[j] = temp;
 						
-						hints.push({ 'array': arr.slice(), 'i1': i, 'i2': j });
+						console.log(i + ', ' + j + ', ' + pivot);
+						console.log(arr);
 						
-						if (hints.length === num_hints) {
-							return i + 1;
+						if (i != j) {
+							hints.push({ 'array': arr.slice(), 'indices': [i, j] });
 						}
 					}
 				}
+				
+				console.log((i + 1) + ', ' + high + ', ' + pivot);
+				console.log(arr);
 				
 				const temp = arr[i + 1];
 				arr[i + 1] = arr[high];
 				arr[high] = temp;
 				
-				hints.push({ 'array': arr.slice(), 'i1': i + 1, 'i2': high });
+				if (i + 1 != high) {
+					hints.push({ 'array': arr.slice(), 'indices': [i + 1, high] });
+				}
 				
 				return i + 1;
 			};
@@ -224,6 +215,7 @@ export const sorts: any[] = [
 				}
 			};
 			
+			console.log(arr);
 			quickSortHelper(arr, 0, arr.length - 1);
 			
 			return hints;
@@ -255,13 +247,7 @@ export const sorts: any[] = [
 					arr[i] = arr[largest];
 					arr[largest] = temp;
 					
-					hints.push({ 'array': arr.slice(), 'i1': i, 'i2': largest });
-					
 					heapify(arr, n, largest);
-					
-					if (hints.length === num_hints) {
-						return;
-					}
 				}
 			};
 			
@@ -277,13 +263,13 @@ export const sorts: any[] = [
 					arr[0] = arr[i];
 					arr[i] = temp;
 					
-					hints.push({ 'array': arr.slice(), 'i1': 0, 'i2': i });
-					
-					heapify(arr, i, 0);
+					hints.push({ 'array': arr.slice(), 'indices': [0, i] });
 					
 					if (hints.length === num_hints) {
 						return;
 					}
+					
+					heapify(arr, i, 0);
 				}
 			};
 			
@@ -300,19 +286,6 @@ export const sorts: any[] = [
 		'run': (arr: number[], num_hints: number): any[] => {
 			var hints: any[] = [];
 			
-			const getMax = (arr: number[]): number => {
-				let max = arr[0];
-				const n = arr.length;
-				
-				for (let i = 1; i < n; i++) {
-					if (arr[i] > max) {
-						max = arr[i];
-					}
-				}
-				
-				return max;
-			};
-			
 			const countSort = (arr: number[], exp: number): void => {
 				const n = arr.length;
 				const output = new Array(n);
@@ -322,27 +295,36 @@ export const sorts: any[] = [
 					count[Math.floor(arr[i] / exp) % 10]++;
 				}
 				
+				console.log(arr);
+				console.log(count);
+				
 				for (let i = 1; i < 10; i++) {
 					count[i] += count[i - 1];
 				}
+				
+				console.log(count);
 				
 				for (let i = n - 1; i >= 0; i--) {
 					const index = Math.floor(arr[i] / exp) % 10;
 					output[count[index] - 1] = arr[i];
 					count[index]--;
-					
-					hints.push({ 'array': output.slice(), 'i1': i, 'i2': count[index] });
 				}
 				
+				var indices = [];
 				for (let i = 0; i < n; i++) {
+					if (arr[i] != output[i]) {
+						indices.push(i);
+					}
+					
 					arr[i] = output[i];
 				}
+				hints.push({ 'array': arr.slice(), 'indices': indices });
 			};
 			
 			const radixSort = (arr: number[]): void => {
-				const max = getMax(arr);
+				const max = Math.max(...arr);
 				
-				for (let exp = 1; max / exp > 0; exp *= 10) {
+				for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
 					countSort(arr, exp);
 				}
 			};
@@ -377,13 +359,17 @@ export const sorts: any[] = [
 					const index = Math.floor(arr[i] / exp) % 10;
 					output[count[index] - 1] = arr[i];
 					count[index]--;
-					
-					hints.push({ 'array': output.slice(), 'i1': i, 'i2': count[index] });
 				}
 				
+				var indices = [];
 				for (let i = 0; i < n; i++) {
+					if (arr[i] != output[i]) {
+						indices.push(i);
+					}
+					
 					arr[i] = output[i];
 				}
+				hints.push({ 'array': arr.slice(), 'indices': indices });
 			};
 			
 			const countingSortHelper = (arr: number[]): void => {

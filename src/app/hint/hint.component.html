@@ -2,7 +2,7 @@
 	<mat-card color="primary">
 		<mat-card-content>
 			<div *ngFor="let number of array['array']; let i = index" class="array-item">
-				<span [ngClass]="array['i1'] == i || array['i2'] == i ? 'changed' : ''">
+				<span [ngClass]="array['indices'].includes(i) ? 'changed' : ''">
 					{{ number }}
 				</span>
 			</div>
