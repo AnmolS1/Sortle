@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class StartComponent {
 	@Input() solution: any;
-	@Input() initial: number[] = [];
+	@Input() array: number[] = [];
 }

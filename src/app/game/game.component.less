@@ -1,0 +1,41 @@
+.board {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	
+	app-guess {
+		margin-top: 22px;
+	}
+	
+	app-guess, app-hint {
+		display: block;
+		width: 40%;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.board {
+		display: flex;
+		flex-direction: column;
+		
+		app-guess {
+			margin-top: unset;
+		}
+		
+		app-hint {
+			margin-bottom: 40px;
+		}
+		
+		app-guess, app-hint {
+			width: 648px;
+		}
+	}
+}
+
+@media screen and (max-width: 648px) {
+	.board {
+		app-guess, app-hint {
+			width: 100%;
+		}
+	}
+}

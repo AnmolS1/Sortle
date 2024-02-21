@@ -1,0 +1,11 @@
+<div class="array-container">
+	<mat-card color="primary">
+		<mat-card-content>
+			<div *ngFor="let number of array['array']; let i = index" class="array-item">
+				<span [ngClass]="array['indices'].includes(i) ? 'changed' : ''">
+					{{ number }}
+				</span>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>
