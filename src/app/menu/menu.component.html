@@ -1,0 +1,10 @@
+<button mat-icon-button class="icon settings-icon" [matMenuTriggerFor]="settingsmenu" aria-label="settings">
+	<mat-icon fontIcon="settings"></mat-icon>
+</button>
+<mat-menu #settingsmenu="matMenu">
+	<button mat-menu-item (click)="openDeleteDialog()">delete account</button>
+</mat-menu>
+
+<button mat-icon-button class="icon account-circle-icon" (click)="openProfileDialog()" aria-label="account options">
+	<mat-icon fontIcon="account_circle"></mat-icon>
+</button>
