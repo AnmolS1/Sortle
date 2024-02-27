@@ -183,17 +183,11 @@ export const sorts: any[] = [
 						arr[i] = arr[j];
 						arr[j] = temp;
 						
-						console.log(i + ', ' + j + ', ' + pivot);
-						console.log(arr);
-						
 						if (i != j) {
 							hints.push({ 'array': arr.slice(), 'indices': [i, j] });
 						}
 					}
 				}
-				
-				console.log((i + 1) + ', ' + high + ', ' + pivot);
-				console.log(arr);
 				
 				const temp = arr[i + 1];
 				arr[i + 1] = arr[high];
@@ -215,7 +209,6 @@ export const sorts: any[] = [
 				}
 			};
 			
-			console.log(arr);
 			quickSortHelper(arr, 0, arr.length - 1);
 			
 			return hints;
@@ -295,14 +288,9 @@ export const sorts: any[] = [
 					count[Math.floor(arr[i] / exp) % 10]++;
 				}
 				
-				console.log(arr);
-				console.log(count);
-				
 				for (let i = 1; i < 10; i++) {
 					count[i] += count[i - 1];
 				}
-				
-				console.log(count);
 				
 				for (let i = n - 1; i >= 0; i--) {
 					const index = Math.floor(arr[i] / exp) % 10;
