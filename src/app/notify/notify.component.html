@@ -1,7 +1,0 @@
-<h2 mat-dialog-title>{{ data.win ? 'You Win!' : 'You Lose :/' }}</h2>
-<mat-dialog-content *ngIf="!data.win">
-	<p>The correct answer was {{ data.solution }}!</p>
-</mat-dialog-content>
-<mat-dialog-actions>
-	<button mat-button (click)="onClose()">close</button>
-</mat-dialog-actions>

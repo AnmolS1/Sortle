@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NotifyComponent } from '../notify/notify.component';
+import { GameOverDialog } from './game-over-dialog/gameoverdialog.component';
+import { GuessComponent } from '../guess/guess.component';
 
 import { sorts } from '../algorithms';
 
@@ -10,14 +11,15 @@ import { sorts } from '../algorithms';
 	styleUrl: './game.component.less'
 })
 export class GameComponent implements OnInit {
+	@ViewChildren(GuessComponent) guessComponents!: QueryList<GuessComponent>;
+	
 	solution: any;
 	starting_array: number[] = []
 	arrays: any[] = [];
 	options: string[] = [];
 	num_guesses: number = 5;
-	
-	guess_index: number = 0;
 	guesses: string[] = [];
+	guess_index: number = 0;
 	
 	constructor(public dialog: MatDialog) {}
 	
@@ -47,28 +49,27 @@ export class GameComponent implements OnInit {
 	}
 	
 	submitGuess(guess: string) {
-		let win: boolean = guess === this.solution['name'];
+		this.guesses[this.guess_index] = guess;
 		
-		if (win) { // correct guess
-			this.guesses[this.guess_index] = guess;
-			this.dialog.open(NotifyComponent, {
+		let win: boolean = guess === this.solution['name'];
+		if (win || this.guess_index == this.num_guesses - 1) {
+			this.dialog.open(GameOverDialog, {
 				data: {
-					win: true,
-					solution: this.solution['name']
+					win: win,
+					solution: this.solution['name'],
+					guesses: this.guesses,
+					total_guesses: this.guess_index + 1
 				}
 			});
-		} else { // incorrect guess
-			this.guesses[this.guess_index++] = guess;
+		} else {
+			this.guess_index++;
 			this.options = this.options.filter(n => n != guess);
-			
-			if (this.guess_index == this.num_guesses) {
-				this.dialog.open(NotifyComponent, {
-					data: {
-						win: false,
-						solution: this.solution['name']
-					}
-				});
-			}
+		}
+	}
+	
+	submitCurrentGuess() {
+		if (this.guessComponents.length > 0) {
+			this.guessComponents.last.submitGuess();
 		}
 	}
 }
