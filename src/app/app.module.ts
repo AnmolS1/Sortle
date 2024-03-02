@@ -25,10 +25,10 @@ import { HeaderComponent } from './header/header.component';
 import { GameComponent } from './game/game.component';
 import { HintComponent } from './hint/hint.component';
 import { GuessComponent } from './guess/guess.component';
-import { NotifyComponent } from './notify/notify.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProfileDialog } from './menu/profile-dialog/profile-dialog.component';
 import { DelAccDialog } from './menu/delacc-dialog/delacc-dialog.component';
+import { GameOverDialog } from './game/game-over-dialog/gameoverdialog.component';
 
 @NgModule({
 	declarations: [
@@ -38,10 +38,10 @@ import { DelAccDialog } from './menu/delacc-dialog/delacc-dialog.component';
 		StartComponent,
 		HintComponent,
 		GuessComponent,
-		NotifyComponent,
 		MenuComponent,
 		ProfileDialog,
 		DelAccDialog,
+		GameOverDialog,
 	],
 	imports: [
 		BrowserModule,

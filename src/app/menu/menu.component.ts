@@ -11,6 +11,10 @@ import { DelAccDialog } from './delacc-dialog/delacc-dialog.component';
 export class MenuComponent {
 	constructor(public dialog: MatDialog) { }
 	
+	openEditDialog(): void {
+		
+	}
+	
 	openDeleteDialog(): void {
 		const dialogRef = this.dialog.open(DelAccDialog);
 	}

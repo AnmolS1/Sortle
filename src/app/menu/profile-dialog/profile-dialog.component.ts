@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
@@ -9,25 +9,33 @@ import { MatDialogRef } from "@angular/material/dialog";
 })
 export class ProfileDialog {
 	option = new FormControl(0);
-	username: string = '';
+	hide_s: boolean = true;
+	hide_l: boolean = true;
+	signup: FormGroup = new FormGroup({
+		username: 	new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9_]*')]),
+		password: 	new FormControl('', [Validators.required, Validators.minLength(8)]),
+		email:	 	new FormControl('', [Validators.required, Validators.email]),
+	});
+	login: FormGroup = new FormGroup({
+		username: 	new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9_]*')]),
+		password: 	new FormControl('', [Validators.required, Validators.minLength(8)]),
+	});
 	
 	constructor(public dialogRef: MatDialogRef<ProfileDialog>) { }
 	
-	signup() {
-		
+	runSignUp() {
+		console.log(this.signup);
 	}
 	
-	login() {
-		
+	runLogIn() {
+		console.log(this.login);
 	}
 	
 	runAction(): void {
-		console.log(this.option.value);
-		
 		if (this.option.value == 0) {
-			this.signup();
+			this.runSignUp();
 		} else {
-			this.login();
+			this.runLogIn();
 		}
 	}
 	
