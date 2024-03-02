@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 .vercel
-.env.development.local
+.env
