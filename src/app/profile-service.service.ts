@@ -5,8 +5,8 @@ import * as AWS from 'aws-sdk';
 	providedIn: 'root'
 })
 export class ProfileService {
-	private accessKeyId: string = process.env['AWS_ACCESS_KEY_ID'] ? process.env['AWS_ACCESS_KEY_ID'] : '';
-	private secretAccessKey: string = process.env['AWS_SECRET_ACCESS_KEY'] ? process.env['AWS_SECRET_ACCESS_KEY'] : '';
+	private accessKeyId: string = (window as any)._env_.AWS_ACCESS_KEY_ID || '';
+	private secretAccessKey: string = (window as any)._env_.AWS_SECRET_ACCESS_KEY || '';
 	
 	private dynamoDB = new AWS.DynamoDB({
 		region: 'us-east-2',
