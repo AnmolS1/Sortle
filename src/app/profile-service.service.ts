@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
 import * as AWS from 'aws-sdk';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ProfileService {
-	private accessKeyId: string = (window as any)._env_.AWS_ACCESS_KEY_ID || '';
-	private secretAccessKey: string = (window as any)._env_.AWS_SECRET_ACCESS_KEY || '';
+	private region: string = environment.AWS_REGION || '';
+	private accessKeyId: string = environment.AWS_ACCESS_KEY_ID || '';
+	private secretAccessKey: string = environment.AWS_SECRET_ACCESS_KEY || '';
 	
 	private dynamoDB = new AWS.DynamoDB({
-		region: 'us-east-2',
+		region: this.region,
 		credentials: {
 			accessKeyId: this.accessKeyId,
 			secretAccessKey: this.secretAccessKey,
@@ -17,8 +19,6 @@ export class ProfileService {
 	});
 	
 	async addUser(user: any): Promise<any> {
-		console.log(process);
-		console.log(process.env);
 		console.log(this.accessKeyId);
 		console.log(this.secretAccessKey);
 		
