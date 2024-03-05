@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NotifyComponent } from '../notify/notify.component';
+import { GameOverDialog } from './game-over-dialog/gameoverdialog.component';
+import { GuessComponent } from '../guess/guess.component';
+import { ProfileService } from '../profile-service.service';
 
 import { sorts } from '../algorithms';
 
@@ -10,16 +12,17 @@ import { sorts } from '../algorithms';
 	styleUrl: './game.component.less'
 })
 export class GameComponent implements OnInit {
+	@ViewChildren(GuessComponent) guessComponents!: QueryList<GuessComponent>;
+	
 	solution: any;
 	starting_array: number[] = []
 	arrays: any[] = [];
 	options: string[] = [];
 	num_guesses: number = 5;
-	
-	guess_index: number = 0;
 	guesses: string[] = [];
+	guess_index: number = 0;
 	
-	constructor(public dialog: MatDialog) {}
+	constructor(public dialog: MatDialog, private profileService: ProfileService) {}
 	
 	ngOnInit(): void {
 		const i = Math.floor(Math.random() * sorts.length);
@@ -47,28 +50,45 @@ export class GameComponent implements OnInit {
 	}
 	
 	submitGuess(guess: string) {
-		let win: boolean = guess === this.solution['name'];
+		this.guesses[this.guess_index] = guess;
 		
-		if (win) { // correct guess
-			this.guesses[this.guess_index] = guess;
-			this.dialog.open(NotifyComponent, {
+		let win: boolean = guess === this.solution['name'];
+		if (win || this.guess_index == this.num_guesses - 1) {
+			this.dialog.open(GameOverDialog, {
 				data: {
-					win: true,
-					solution: this.solution['name']
+					win: win,
+					solution: this.solution['name'],
+					guesses: this.guesses,
+					total_guesses: this.guess_index + 1
 				}
 			});
-		} else { // incorrect guess
-			this.guesses[this.guess_index++] = guess;
+		} else {
+			this.guess_index++;
 			this.options = this.options.filter(n => n != guess);
-			
-			if (this.guess_index == this.num_guesses) {
-				this.dialog.open(NotifyComponent, {
-					data: {
-						win: false,
-						solution: this.solution['name']
-					}
-				});
-			}
 		}
+	}
+	
+	submitCurrentGuess() {
+		if (this.guessComponents.length > 0) {
+			this.guessComponents.last.submitGuess();
+		}
+	}
+	
+	tempFunc() {
+		const userToAdd = {
+			username: { S: 'testingpart3' },
+			password: { S: 'woot woot' },
+			email: { S: 'notanemail@notanemail.com' },
+			wins: { N: '0' },
+			losses: { N: '0' },
+		};
+		
+		this.profileService.addUser(userToAdd).then((result) => {
+			console.log('i think it worked!')
+			console.log(result);
+		}).catch((error) => {
+			console.error('aight try something else');
+			console.error(error);
+		});
 	}
 }

@@ -6,3 +6,11 @@
 	<app-guess *ngIf="guess_index > i - 1" [options]="options" [solution]="solution" (guessSubmitted)="submitGuess($event)"></app-guess>
 	<app-hint *ngIf="guesses[i] != '' && guesses[i] != solution['name']" [array]="arrays[i] ? arrays[i] : []"></app-hint>
 </div>
+
+<div id="submitBtnContainer">
+	<button mat-button id="submitBtn" (click)="submitCurrentGuess()">submit guess</button>
+</div>
+
+<div id="submitBtnContainer">
+	<button mat-button id="submitBtn" (click)="tempFunc()">wamp wamp</button>
+</div>

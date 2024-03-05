@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{ data.win ? 'You Win!' : 'You Lose :/' }}</h2>
+
+<mat-dialog-content>
+	<p *ngIf="!data.win">
+		The correct answer was {{ data.solution }}!
+	</p>
+	
+	<div>
+		<p *ngFor="let guess of final" class="guessContainer">
+			<mat-icon [style.color]="guess ? 'green' : 'red'">
+				{{ guess ? 'check_box' : 'disabled_by_default' }}
+			</mat-icon>
+		</p>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button mat-button (click)="onClose()">close</button>
+	<button mat-button (click)="onShare()">share result</button>
+</mat-dialog-actions>

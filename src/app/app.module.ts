@@ -11,7 +11,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialogModule, MatDialogTitle, MatDialogContent } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,7 +25,10 @@ import { HeaderComponent } from './header/header.component';
 import { GameComponent } from './game/game.component';
 import { HintComponent } from './hint/hint.component';
 import { GuessComponent } from './guess/guess.component';
-import { NotifyComponent } from './notify/notify.component';
+import { MenuComponent } from './menu/menu.component';
+import { ProfileDialog } from './menu/profile-dialog/profile-dialog.component';
+import { DelAccDialog } from './menu/delacc-dialog/delacc-dialog.component';
+import { GameOverDialog } from './game/game-over-dialog/gameoverdialog.component';
 
 @NgModule({
 	declarations: [
@@ -31,7 +38,10 @@ import { NotifyComponent } from './notify/notify.component';
 		StartComponent,
 		HintComponent,
 		GuessComponent,
-		NotifyComponent
+		MenuComponent,
+		ProfileDialog,
+		DelAccDialog,
+		GameOverDialog,
 	],
 	imports: [
 		BrowserModule,
@@ -47,9 +57,14 @@ import { NotifyComponent } from './notify/notify.component';
 		MatAutocompleteModule,
 		MatInputModule,
 		MatFormFieldModule,
-		MatDialogModule,
 		MatDialogTitle,
 		MatDialogContent,
+		MatDialogActions,
+		MatDialogClose,
+		MatIconModule,
+		MatButtonModule,
+		MatMenuModule,
+		MatTabsModule,
 	],
 	providers: [
 		provideAnimationsAsync()
