@@ -46,4 +46,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v3
         with:
-          publish_dir: "docs"
+          artifact_name: "docs"
