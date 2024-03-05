@@ -2,6 +2,7 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GameOverDialog } from './game-over-dialog/gameoverdialog.component';
 import { GuessComponent } from '../guess/guess.component';
+import { ProfileService } from '../profile-service.service';
 
 import { sorts } from '../algorithms';
 
@@ -21,7 +22,7 @@ export class GameComponent implements OnInit {
 	guesses: string[] = [];
 	guess_index: number = 0;
 	
-	constructor(public dialog: MatDialog) {}
+	constructor(public dialog: MatDialog, private profileService: ProfileService) {}
 	
 	ngOnInit(): void {
 		const i = Math.floor(Math.random() * sorts.length);
@@ -71,5 +72,23 @@ export class GameComponent implements OnInit {
 		if (this.guessComponents.length > 0) {
 			this.guessComponents.last.submitGuess();
 		}
+	}
+	
+	tempFunc() {
+		const userToAdd = {
+			username: { S: 'testingpart3' },
+			password: { S: 'woot woot' },
+			email: { S: 'notanemail@notanemail.com' },
+			wins: { N: '0' },
+			losses: { N: '0' },
+		};
+		
+		this.profileService.addUser(userToAdd).then((result) => {
+			console.log('i think it worked!')
+			console.log(result);
+		}).catch((error) => {
+			console.error('aight try something else');
+			console.error(error);
+		});
 	}
 }

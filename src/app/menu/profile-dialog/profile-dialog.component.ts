@@ -24,10 +24,18 @@ export class ProfileDialog {
 	constructor(public dialogRef: MatDialogRef<ProfileDialog>) { }
 	
 	runSignUp() {
+		if (this.signup.invalid) {
+			return;
+		}
+		
 		console.log(this.signup);
 	}
 	
 	runLogIn() {
+		if (this.login.invalid) {
+			return;
+		}
+		
 		console.log(this.login);
 	}
 	
