@@ -1,0 +1,5 @@
+ng build
+
+cat docs/index.html > docs/404.html
+
+echo "completed build and created 404 file, ready for commit"
