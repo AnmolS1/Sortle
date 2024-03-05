@@ -28,7 +28,7 @@
 						"baseHref": "/sortle/",
 						"index": "src/index.html",
 						"main": "src/main.ts",
-						"polyfills": ["src/polyfills.ts"],
+						"polyfills": ["zone.js"],
 						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "less",
 						"assets": ["src/favicon.ico", "src/assets"],
@@ -89,7 +89,7 @@
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
-						"polyfills": ["src/polyfills.ts", "src/polyfills.ts/testing"],
+						"polyfills": ["zone.js", "zone.js/testing"],
 						"tsConfig": "tsconfig.spec.json",
 						"inlineStyleLanguage": "less",
 						"assets": ["src/favicon.ico", "src/assets"],
