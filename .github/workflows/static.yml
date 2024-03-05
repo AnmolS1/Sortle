@@ -14,7 +14,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  actions: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -39,9 +38,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs'
+          path: './docs'
           name: 'docs'
       - name: Deploy to GitHub Pages
         id: deployment
