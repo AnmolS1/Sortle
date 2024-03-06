@@ -21,9 +21,11 @@
 		"@angular/platform-browser": "^17.0.0",
 		"@angular/platform-browser-dynamic": "^17.0.0",
 		"@angular/router": "^17.0.0",
-		"aws-sdk": "^2.1569.0",
+		"@aws-sdk/client-dynamodb": "^3.525.0",
+		"@vercel/node": "^3.0.20",
 		"rxjs": "~7.8.0",
 		"tslib": "^2.3.0",
+		"vercel": "^33.5.3",
 		"zone.js": "~0.14.2"
 	},
 	"devDependencies": {
