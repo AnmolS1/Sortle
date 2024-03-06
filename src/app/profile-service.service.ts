@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment as defaultEnvironment } from '../environments/environment';
 import * as AWS from 'aws-sdk';
+
+const environment = { ...defaultEnvironment, ...require('../environments/environment').environment };
 
 @Injectable({
 	providedIn: 'root'

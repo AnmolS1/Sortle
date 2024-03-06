@@ -76,7 +76,7 @@ export class GameComponent implements OnInit {
 	
 	tempFunc() {
 		const userToAdd = {
-			username: { S: 'testingpart3' },
+			username: { S: 'testingpart4' },
 			password: { S: 'woot woot' },
 			email: { S: 'notanemail@notanemail.com' },
 			wins: { N: '0' },
