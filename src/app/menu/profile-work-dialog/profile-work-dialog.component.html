@@ -8,7 +8,7 @@
 					<mat-label>username</mat-label>
 					<input matInput formControlName="username">
 					<mat-hint *ngIf="!signup.get('username')?.value && !signup.get('username')?.dirty">can contain letters, numbers, and underscores</mat-hint>
-					<mat-error *ngIf="signup.get('username')?.invalid">must contain letters, digits, and underscores</mat-error>
+					<mat-error *ngIf="signup.get('username')?.invalid">{{ getSignUpUsernameError() }}</mat-error>
 				</mat-form-field>
 				<mat-form-field>
 					<mat-label>password</mat-label>
@@ -29,11 +29,13 @@
 				<mat-form-field>
 					<mat-label>username</mat-label>
 					<input matInput formControlName="username">
+					<mat-error *ngIf="login.get('username')?.invalid">{{ getLoginUsernameError() }}</mat-error>
 				</mat-form-field>
 				<mat-form-field>
 					<mat-label>password</mat-label>
 					<input matInput [type]="hide_l ? 'password' : 'text'" formControlName="password">
 					<mat-icon matSuffix (click)="hide_l = !hide_l">{{hide_l ? 'visibility_off' : 'visibility'}}</mat-icon>
+					<mat-error *ngIf="login.get('password')?.invalid">{{ getLoginPasswordError() }}</mat-error>
 				</mat-form-field>
 			</form>
 		</mat-tab>
@@ -43,4 +45,5 @@
 <mat-dialog-actions>
 	<button mat-button (click)="close()" cdkFocusInitial>close</button>
 	<button mat-button [disabled]="option.value == 0 ? !signup.valid : !login.valid" (click)="runAction()">{{ option.value == 0 ? 'sign up' : 'log in' }}</button>
+	<!-- <button mat-button (click)="runAction()">{{ option.value == 0 ? 'sign up' : 'log in' }}</button> -->
 </mat-dialog-actions>

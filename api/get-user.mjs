@@ -2,12 +2,6 @@ import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
 
 export async function GET(request) {
 	try {
-		const user = JSON.parse(new URL(request.url).searchParams.get('user'));
-		const params = {
-			TableName: 'profiles',
-			Key: user
-		};
-		
 		const client = new DynamoDBClient({
 			region: process.env['AWS_REGION'],
 			credentials: {
@@ -16,7 +10,11 @@ export async function GET(request) {
 			}
 		});
 		
-		const command = new GetItemCommand(params);
+		const username = JSON.parse(new URL(request.url).searchParams.get('username'));
+		const command = new GetItemCommand({
+			TableName: 'profiles',
+			Key: username
+		});
 		const response = await client.send(command);
 		
 		if (response.Item) {

@@ -1,11 +1,19 @@
-<button mat-icon-button class="icon settings-icon" [matMenuTriggerFor]="settingsmenu" aria-label="settings">
-	<mat-icon>settings</mat-icon>
-</button>
-<mat-menu #settingsmenu="matMenu">
-	<button mat-menu-item (click)="openDeleteDialog()">delete account</button>
-	<button mat-menu-item (click)="openEditDialog()">edit account</button>
-</mat-menu>
+<ng-container *ngIf="!isLoggedIn">
+	<button mat-icon-button class="icon account-circle-icon" (click)="openProfileWorkDialog()" aria-label="account options">
+		<mat-icon>account_circle</mat-icon>
+	</button>
+</ng-container>
 
-<button mat-icon-button class="icon account-circle-icon" (click)="openProfileDialog()" aria-label="account options">
-	<mat-icon>account_circle</mat-icon>
-</button>
+<ng-container *ngIf="isLoggedIn">
+	<button mat-icon-button class="icon account-circle-icon" [matMenuTriggerFor]="menu" aria-label="menu">
+		<mat-icon>account_circle</mat-icon>
+	</button>
+	<mat-menu #menu="matMenu">
+		<button mat-menu-item (click)="openProfileViewDialog()">
+			<strong>{{ username }}'s profile</strong>
+		</button>
+		
+		<button mat-menu-item (click)="openEditDialog()">edit profile</button>
+		<button mat-menu-item (click)="openDeleteDialog()">delete profile</button>
+	</mat-menu>
+</ng-container>

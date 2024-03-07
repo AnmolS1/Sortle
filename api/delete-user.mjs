@@ -1,4 +1,4 @@
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, DeleteItemCommand } from "@aws-sdk/client-dynamodb";
 
 export async function GET(request) {
 	try {
@@ -10,19 +10,15 @@ export async function GET(request) {
 			}
 		});
 		
-		const user = JSON.parse(new URL(request.url).searchParams.get('user'));
-		const command = new PutItemCommand({
+		const username = JSON.parse(new URL(request.url).searchParams.get('username'));
+		const command = new DeleteItemCommand({
 			TableName: 'profiles',
-			Item: user,
-			ConditionExpression: 'attribute_not_exists(username)'
+			Key: username
 		});
 		const response = await client.send(command);
 		
 		return new Response(JSON.stringify(response));
 	} catch (error) {
-		if (error.message == 'The conditional request failed') {
-			return new Response(JSON.stringify({ userAlreadyExists: true }), { status: 200 });
-		}
 		return new Response(`Error: ${error.message}`, { status: 500 });
 	}
 }

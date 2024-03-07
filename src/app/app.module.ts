@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule} from '@angular/material/table';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +28,8 @@ import { GameComponent } from './game/game.component';
 import { HintComponent } from './hint/hint.component';
 import { GuessComponent } from './guess/guess.component';
 import { MenuComponent } from './menu/menu.component';
-import { ProfileDialog } from './menu/profile-dialog/profile-dialog.component';
+import { ProfileWorkDialog } from './menu/profile-work-dialog/profile-work-dialog.component';
+import { ProfileViewDialog } from './menu/profile-view-dialog/profile-view-dialog.component';
 import { DelAccDialog } from './menu/delacc-dialog/delacc-dialog.component';
 import { GameOverDialog } from './game/game-over-dialog/gameoverdialog.component';
 
@@ -40,7 +42,8 @@ import { GameOverDialog } from './game/game-over-dialog/gameoverdialog.component
 		HintComponent,
 		GuessComponent,
 		MenuComponent,
-		ProfileDialog,
+		ProfileWorkDialog,
+		ProfileViewDialog,
 		DelAccDialog,
 		GameOverDialog,
 	],
@@ -67,6 +70,7 @@ import { GameOverDialog } from './game/game-over-dialog/gameoverdialog.component
 		MatButtonModule,
 		MatMenuModule,
 		MatTabsModule,
+		MatTableModule,
 	],
 	providers: [
 		provideAnimationsAsync()
