@@ -20,7 +20,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule} from '@angular/material/table';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';

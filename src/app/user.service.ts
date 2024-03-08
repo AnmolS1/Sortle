@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from './models/user';
+import { User } from './user';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -66,7 +66,7 @@ export class UserService {
 					} else if (result.password.S != password) {
 						observer.error(new Error(`password is incorrect`));
 					} else {
-						this.login(result as User);
+						this.login(result);
 						observer.next(result);
 						observer.complete();
 					}
@@ -99,7 +99,7 @@ export class UserService {
 		return new Observable<any>((observer) => {
 			this.http.get('/api/update-user', { params }).subscribe({
 				next: (result: any) => {
-					this.login(result.Attributes as User);
+					this.login(result.Attributes);
 					observer.complete();
 				}, error: (error) => {
 					observer.error(error);
