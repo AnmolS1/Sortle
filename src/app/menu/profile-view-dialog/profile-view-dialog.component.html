@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{ username }}</h1>
+
+<mat-dialog-content>
+	<div>{{ email }}</div>
+	<br>
+	<div>
+		Wins: {{ wins }}
+		<br>
+		Losses: {{ losses }}
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button mat-button (click)="close()" cdkFocusInitial>close</button>
+	<button mat-button (click)="logout()">logout</button>
+</mat-dialog-actions>

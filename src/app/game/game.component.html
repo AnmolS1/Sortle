@@ -8,9 +8,7 @@
 </div>
 
 <div id="submitBtnContainer">
-	<button mat-button id="submitBtn" (click)="submitCurrentGuess()">submit guess</button>
-</div>
-
-<div id="submitBtnContainer">
-	<button mat-button id="submitBtn" (click)="tempFunc()">wamp wamp</button>
+	<button mat-button *ngIf="!gameOver" id="submitBtn" (click)="submitCurrentGuess()">submit guess</button>
+	<button mat-button *ngIf="gameOver" id="shareBtn" (click)="openGameOverDialog(guesses[guess_index] == solution['name'])">share result</button>
+	<button mat-button *ngIf="gameOver" id="newGameBtn" (click)="restart()">new game</button>
 </div>

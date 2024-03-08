@@ -25,10 +25,9 @@
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
 						"outputPath": "docs/",
-						"baseHref": "/sortle/",
 						"index": "src/index.html",
 						"main": "src/main.ts",
-						"polyfills": ["src/polyfills.ts"],
+						"polyfills": ["zone.js"],
 						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "less",
 						"assets": ["src/favicon.ico", "src/assets"],
@@ -52,13 +51,7 @@
 									"maximumError": "4kb"
 								}
 							],
-							"outputHashing": "all",
-							"fileReplacements": [
-								{
-									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environments.prod.ts"
-								}
-							]
+							"outputHashing": "all"
 						},
 						"development": {
 							"optimization": false,
@@ -89,7 +82,7 @@
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
-						"polyfills": ["src/polyfills.ts", "src/polyfills.ts/testing"],
+						"polyfills": ["zone.js", "zone.js/testing"],
 						"tsConfig": "tsconfig.spec.json",
 						"inlineStyleLanguage": "less",
 						"assets": ["src/favicon.ico", "src/assets"],

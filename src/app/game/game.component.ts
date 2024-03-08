@@ -2,8 +2,6 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GameOverDialog } from './game-over-dialog/gameoverdialog.component';
 import { GuessComponent } from '../guess/guess.component';
-import { ProfileService } from '../profile-service.service';
-
 import { sorts } from '../algorithms';
 
 @Component({
@@ -21,20 +19,23 @@ export class GameComponent implements OnInit {
 	num_guesses: number = 5;
 	guesses: string[] = [];
 	guess_index: number = 0;
+	gameOver: boolean = false;
 	
-	constructor(public dialog: MatDialog, private profileService: ProfileService) {}
+	constructor(public dialog: MatDialog) {}
 	
 	ngOnInit(): void {
+		this.gameOver = false;
 		const i = Math.floor(Math.random() * sorts.length);
 		this.solution = sorts[i];
-		
 		this.starting_array = this.generateRandomArray();
-		
 		this.arrays = this.solution['run'](this.starting_array.slice(), this.num_guesses);
-		
 		this.options = sorts.map((sort) => sort['name']);
-		
 		this.guesses = Array(this.num_guesses).fill('');
+		this.guess_index = 0;
+	}
+	
+	restart() {
+		location.reload();
 	}
 	
 	generateRandomArray(): number[] {
@@ -49,19 +50,24 @@ export class GameComponent implements OnInit {
 		return initialArray;
 	}
 	
+	openGameOverDialog(win: boolean) {
+		return this.dialog.open(GameOverDialog, {
+			data: {
+				win: win,
+				solution: this.solution['name'],
+				guesses: this.guesses,
+				total_guesses: this.guess_index + 1
+			}
+		});
+	}
+	
 	submitGuess(guess: string) {
 		this.guesses[this.guess_index] = guess;
 		
 		let win: boolean = guess === this.solution['name'];
 		if (win || this.guess_index == this.num_guesses - 1) {
-			this.dialog.open(GameOverDialog, {
-				data: {
-					win: win,
-					solution: this.solution['name'],
-					guesses: this.guesses,
-					total_guesses: this.guess_index + 1
-				}
-			});
+			this.gameOver = true;
+			this.openGameOverDialog(win);
 		} else {
 			this.guess_index++;
 			this.options = this.options.filter(n => n != guess);
@@ -72,23 +78,5 @@ export class GameComponent implements OnInit {
 		if (this.guessComponents.length > 0) {
 			this.guessComponents.last.submitGuess();
 		}
-	}
-	
-	tempFunc() {
-		const userToAdd = {
-			username: { S: 'testingpart3' },
-			password: { S: 'woot woot' },
-			email: { S: 'notanemail@notanemail.com' },
-			wins: { N: '0' },
-			losses: { N: '0' },
-		};
-		
-		this.profileService.addUser(userToAdd).then((result) => {
-			console.log('i think it worked!')
-			console.log(result);
-		}).catch((error) => {
-			console.error('aight try something else');
-			console.error(error);
-		});
 	}
 }

@@ -16,5 +16,6 @@
 
 <mat-dialog-actions>
 	<button mat-button (click)="onClose()">close</button>
-	<button mat-button (click)="onShare()">share result</button>
+	<button mat-button *ngIf="canLogin" (click)="onLogin()">login to save</button>
+	<button mat-button (click)="onShare()">share</button>
 </mat-dialog-actions>
