@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -19,8 +20,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule} from '@angular/material/table';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 
-import { AppRoutingModule } from './app-routing.module';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
 import { HeaderComponent } from './header/header.component';
@@ -73,7 +74,8 @@ import { GameOverDialog } from './game/game-over-dialog/gameoverdialog.component
 		MatTableModule,
 	],
 	providers: [
-		provideAnimationsAsync()
+		CookieService,
+		provideAnimationsAsync(),
 	],
 	bootstrap: [AppComponent]
 })

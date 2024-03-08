@@ -42,8 +42,8 @@ export class ProfileWorkDialog {
 			username: 	{ S: this.signup.get('username')!.value },
 			password: 	{ S: this.signup.get('password')!.value },
 			email: 		{ S: this.signup.get('email')!.value },
-			wins: 		{ N: '0' },
-			losses: 	{ N: '0' }
+			wins: 		{ N: 0 },
+			losses: 	{ N: 0 }
 		};
 		
 		this.userService.createUser(userToCreate).subscribe({

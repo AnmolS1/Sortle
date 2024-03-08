@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './models/user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,14 +10,18 @@ import { User } from './models/user';
 export class UserService {
 	private user: User | null = null;
 	
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private cookieService: CookieService) {
+		this.user = this.checkCookie('user') ? this.getCookie('user') : null;
+	}
 	
 	login(user: User) {
 		this.user = user;
+		this.setCookie('user', this.user, 7);
 	}
 	
 	logout() {
 		this.user = null;
+		this.deleteCookie('user');
 	}
 	
 	isLoggedIn() {
@@ -83,7 +88,42 @@ export class UserService {
 				}, error: (error) => {
 					observer.error(error);
 				}
-			})
+			});
 		});
+	}
+	
+	updateUser(column: string, value: string | number): Observable<any> {
+		let params = new HttpParams().set('username', JSON.stringify({ username: { S: this.getUsername() } }))
+			.set('column', column).set('value', value);
+		
+		return new Observable<any>((observer) => {
+			this.http.get('/api/update-user', { params }).subscribe({
+				next: (result: any) => {
+					this.login(result.Attributes as User);
+					observer.complete();
+				}, error: (error) => {
+					observer.error(error);
+				}
+			});
+		});
+	}
+	
+	getCookie(name: string): User {
+		return JSON.parse(this.cookieService.get(name));
+	}
+	
+	setCookie(name: string, value: User, days: number): void {
+		const expires = days * 24 * 60 * 60 * 1000;
+		const expirationDate = new Date(Date.now() + expires);
+		
+		this.cookieService.set(name, JSON.stringify(value), expirationDate, '/');
+	}
+	
+	deleteCookie(name: string) {
+		this.cookieService.delete(name);
+	}
+	
+	checkCookie(name: string) {
+		return this.cookieService.check(name);
 	}
 }

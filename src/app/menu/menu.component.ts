@@ -29,19 +29,19 @@ export class MenuComponent {
 	}
 	
 	openDeleteDialog(): void {
-		const dialogRef = this.dialog.open(DelAccDialog);
-		dialogRef.afterClosed().subscribe({ next: _ => { this.updateInfo(); } });
+		this.dialog.open(DelAccDialog).afterClosed().subscribe({
+			next: _ => { this.updateInfo(); }
+		});
 	}
 	
 	openProfileViewDialog() {
-		const dialogRef = this.dialog.open(ProfileViewDialog);
-		dialogRef.afterClosed().subscribe({ next: _ => { this.updateInfo(); } });
+		this.dialog.open(ProfileViewDialog).afterClosed().subscribe({
+			next: _ => { this.updateInfo(); }
+		});
 	}
 	
 	openProfileWorkDialog() {
-		const dialogRef = this.dialog.open(ProfileWorkDialog);
-		
-		dialogRef.afterClosed().subscribe({
+		this.dialog.open(ProfileWorkDialog).afterClosed().subscribe({
 			next: _ => {
 				this.updateInfo();
 				if (this.isLoggedIn) {
